@@ -15,7 +15,20 @@ but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 MIT for more details.
 
-You should have received a copy of the MIT License along with TB-AMR-Bench.
+You should have received a copy of the MIT License along with TB-AMR-Bench. All supplementary data [Google Drive](https://drive.google.com/drive/folders/17DBf0hSLbbl0xsRwQb_7DQhSCP1qok6r?usp=drive_link) developed as part of this study are also released under the MIT License.
+
+### TBProfiler
+TBProfiler was used for drug-resistance prediction, and its gene-set BED file was used to extract Tier 1 & 2 variants. The BED file is not redistributed as part of this repository. The corresponding TBProfiler paper is acknowledged, and the relevant software version is reported.
+
+### WHO Mutation Catalogue and Dataset
+
+The WHO Catalogue of mutations in Mycobacterium tuberculosis and their association with drug resistance (2023) was used as a reference resource for TB drug-resistance analysis. The corresponding WHO dataset was also used to generate the input matrices for the benchmarking experiments.
+
+**Attribution:** World Health Organization. 2023. Catalogue of mutations in Mycobacterium tuberculosis complex and their association with drug resistance, Second Edition. Geneva: World Health Organization.
+
+**Licence:** Creative Commons Attribution-NonCommercial-ShareAlike 3.0 IGO (CC BY-NC-SA 3.0 IGO) [Link](https://creativecommons.org/licenses/by-nc-sa/3.0/igo/).
+
+Any WHO-derived materials reproduced or used in this repository remain subject to the applicable licence terms.
 
 ## Overview
 
