@@ -286,7 +286,7 @@ def _compute_metrics(model, X, y_true, thr):
     return {"ACC" : acc, "Sen" : sen, "Spe": spe, "F1":f1, "ROC_AUC" : roc_auc, "PR_AUC":pr_auc}
 
 
-def run_crossval(X : str , Y : str, model, dataset_name : str, encoding_method: str):
+def run_crossval(X : str , Y : str, model, dataset_name : str, encoding_method: str, balanced : bool = False):
  
     # --- Load Data for the current drug ---
     drug = dataset_name
@@ -302,6 +302,23 @@ def run_crossval(X : str , Y : str, model, dataset_name : str, encoding_method: 
     )
     print(f"Initial data split: {len(y_train_val)} for CV, {len(y_held_out_test)} for final hold-out test.")
 
+    if balanced:
+        #Balanced sampling
+        pos_idx = np.where(y_train_val == 1)[0]
+        neg_idx = np.where(y_train_val == 0)[0]
+        np.random.seed(42)
+        np.random.shuffle(pos_idx)
+        np.random.shuffle(neg_idx)
+    
+        # Choose equal number from each
+        k = min(len(pos_idx), len(neg_idx))
+    
+        balanced_idx = np.concatenate([pos_idx[:k], neg_idx[:k]])
+        np.random.shuffle(balanced_idx)
+    
+        X_train_val = X_train_val[balanced_idx]
+        y_train_val = y_train_val[balanced_idx]
+
     if encoding_method.upper() == 'SDCNN':
         try:
             alpha_matrix = alpha_mat(y_train_val, df_geno_pheno)
@@ -311,6 +328,7 @@ def run_crossval(X : str , Y : str, model, dataset_name : str, encoding_method: 
     if encoding_method.upper() == 'OHE':
         # need to check
         X_train_val, X_held_out_test = gen_ohe(X_train_val,X_held_out_test,drug,model)
+
          
     print(f"\n--- Model: {model.name} ---")
     # ======================================================================
